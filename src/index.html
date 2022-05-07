@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>VIT WiFi Manager!</title>
+    <link rel="stylesheet" href="index.css" />
+  </head>
+  <body>
+    <h1>💖 VIT WiFi Manager!</h1>
+    <p>Welcome to your Electron application.</p>
+    <h6>Your Current Registration Number:</h6>
+    <p id="regno-display"></p>
+    <h6>Your Current Password:</h6>
+    <p id="password-display"></p>
+    <!-- form -->
+    <form id="regform">
+      <div>
+        <label for="regno">
+          Registration Number:
+          <input
+            id="regno"
+            type="text"
+            name="name"
+            placeholder="Your registration number"
+          />
+        </label>
+      </div>
+      <div>
+        <label for="password">
+          Password:
+          <input
+            id="password"
+            type="password"
+            name="password"
+            placeholder="Your wifi password"
+          />
+        </label>
+      </div>
+      <button type="submit">Submit</button>
+    </form>
+    <!-- end form -->
+    <!-- WiFi settings -->
+    <button id="login-to-wifi">Login to wifi</button>
+    <button id="logout-wifi">Logout wifi</button>
+    <script defer src="renderer.js"></script>
+  </body>
+</html>
