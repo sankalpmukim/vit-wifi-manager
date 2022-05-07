@@ -45,6 +45,7 @@
     }
   },
   "dependencies": {
+    "electron": "^18.2.0",
     "electron-squirrel-startup": "^1.0.0",
     "electron-store": "^8.0.1",
     "node-fetch": "^2.6.7"
@@ -54,7 +55,6 @@
     "@electron-forge/maker-deb": "^6.0.0-beta.63",
     "@electron-forge/maker-rpm": "^6.0.0-beta.63",
     "@electron-forge/maker-squirrel": "^6.0.0-beta.63",
-    "@electron-forge/maker-zip": "^6.0.0-beta.63",
-    "electron": "18.2.0"
+    "@electron-forge/maker-zip": "^6.0.0-beta.63"
   }
 }
