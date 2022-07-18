@@ -166,7 +166,7 @@ app.whenReady().then(() => {
   appIcon.setContextMenu(contextMenu);
   appIcon.on("click", async () => {
     console.log("clicked");
-    await connectTo24GWifi();
+    // await connectTo24GWifi();
     await loginToWifi();
   });
   appIcon.on("double-click", async () => {
