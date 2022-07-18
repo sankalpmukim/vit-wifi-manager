@@ -146,7 +146,7 @@ app.whenReady().then(() => {
       },
     },
     {
-      label: "Connect to 24G",
+      label: "Connect to 2.4G",
       click: () => {
         connectTo24GWifi();
       },
