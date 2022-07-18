@@ -54,12 +54,18 @@ const disconnectFromWifi = async () => {
   await wifi.disconnect();
 };
 const connectTo24GWifi = async () => {
-  await disconnectFromWifi();
-  await wifi.connect({ ssid: "VIT2.4G" });
+  // if connected to wifi that is not 2.4G wifi, disconnect
+  if ((await wifi.getCurrentConnectedSSID()) !== "VIT24G") {
+    await disconnectFromWifi();
+    await wifi.connect({ ssid: "VIT2.4G" });
+  }
 };
 const connectTo5GWifi = async () => {
-  await disconnectFromWifi();
-  await wifi.connect({ ssid: "VIT5G" });
+  // if connected to wifi that is not 5G wifi, disconnect
+  if ((await wifi.getCurrentConnectedSSID()) !== "VIT5G") {
+    await disconnectFromWifi();
+    await wifi.connect({ ssid: "VIT5G" });
+  }
 };
 
 const createWindow = () => {
