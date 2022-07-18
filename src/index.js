@@ -1,6 +1,7 @@
 const { app, BrowserWindow, Menu, Tray } = require("electron");
 const Store = require("electron-store");
 const path = require("path");
+const wifi = require("node-wifi");
 const fetch = require("node-fetch");
 
 // Handle creating/removing shortcuts on Windows when installing/uninstalling.
@@ -48,6 +49,17 @@ const logoutFromWifi = async () => {
     console.log(error);
     alert("Logout failed");
   }
+};
+const disconnectFromWifi = async () => {
+  await wifi.disconnect();
+};
+const connectTo24GWifi = async () => {
+  await disconnectFromWifi();
+  await wifi.connect({ ssid: "VIT2.4G" });
+};
+const connectTo5GWifi = async () => {
+  await disconnectFromWifi();
+  await wifi.connect({ ssid: "VIT5G" });
 };
 
 const createWindow = () => {
@@ -127,6 +139,18 @@ app.whenReady().then(() => {
         app.quit();
       },
     },
+    {
+      label: "Connect to 24G",
+      click: () => {
+        connectTo24GWifi();
+      },
+    },
+    {
+      label: "Connect to 5G",
+      click: () => {
+        connectTo5GWifi();
+      },
+    },
   ]);
 
   // Make a change to the context menu
@@ -136,16 +160,21 @@ app.whenReady().then(() => {
   appIcon.setContextMenu(contextMenu);
   appIcon.on("click", async () => {
     console.log("clicked");
+    await connectTo24GWifi();
     await loginToWifi();
   });
   appIcon.on("double-click", async () => {
     console.log("double clicked");
     await logoutFromWifi();
+    await disconnectFromWifi();
   });
 });
 
 // initializing the store
 const store = new Store();
+wifi.init({
+  iface: null, // network interface, choose a random wifi interface if set to null
+});
 
 // initializing regno
 if (store.get("regno") === undefined) {

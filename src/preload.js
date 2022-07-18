@@ -1,7 +1,12 @@
+const wifi = require("node-wifi");
+
 window.addEventListener("DOMContentLoaded", () => {
   const Store = require("electron-store");
   console.log("Hello World");
   const store = new Store();
+  wifi.init({
+    iface: null, // network interface, choose a random wifi interface if set to null
+  });
 
   const updateDisplay = () => {
     const regno = store.get("regno");
@@ -52,6 +57,17 @@ window.addEventListener("DOMContentLoaded", () => {
       alert("Logout failed");
     }
   };
+  const disconnectFromWifi = async () => {
+    await wifi.disconnect();
+  };
+  const connectTo24GWifi = async () => {
+    await disconnectFromWifi();
+    await wifi.connect({ ssid: "VIT2.4G" });
+  };
+  const connectTo5GWifi = async () => {
+    await disconnectFromWifi();
+    await wifi.connect({ ssid: "VIT5G" });
+  };
   updateDisplay();
   const form = document.getElementById("regform");
   form.addEventListener("submit", (e) => {
@@ -71,4 +87,10 @@ window.addEventListener("DOMContentLoaded", () => {
   loginToWifiBtn.addEventListener("click", loginToWifi);
   const logoutFromWifiBtn = document.getElementById("logout-wifi");
   logoutFromWifiBtn.addEventListener("click", logoutFromWifi);
+  const connectTo24GWifiBtn = document.getElementById("connect-to-24g-wifi");
+  connectTo24GWifiBtn.addEventListener("click", connectTo24GWifi);
+  const connectTo5GWifiBtn = document.getElementById("connect-to-5g-wifi");
+  connectTo5GWifiBtn.addEventListener("click", connectTo5GWifi);
+  const disconnectFromWifiBtn = document.getElementById("disconnect-from-wifi");
+  disconnectFromWifiBtn.addEventListener("click", disconnectFromWifi);
 });
